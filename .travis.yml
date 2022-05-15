@@ -5,5 +5,5 @@ jobs:
   include:
     - stage: build & push core Docker image
       script:
-        - 'docker -f .devcontainer/Dockerfile -D build  --tag antojf/$(basename -- $TRAVIS_BUILD_DIR):latest .'
+        - 'docker -D build -f .devcontainer/Dockerfile --tag antojf/$(basename -- $TRAVIS_BUILD_DIR):latest .'
         - bash docker_push $(basename -- $TRAVIS_BUILD_DIR)
