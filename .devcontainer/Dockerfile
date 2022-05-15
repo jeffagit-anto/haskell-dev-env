@@ -16,6 +16,8 @@ ENV USERNAME=haskeller \
     CABAL_VERSION=${CABAL_VERSION} \
     HLS_VERSION=${HLS_VERSION}
 
+RUN ulimit -n 8192
+
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends  apt-utils git curl xz-utils gcc make libtinfo5 libgmp-dev zlib1g-dev bash sudo procps lsb-release ca-certificates build-essential curl libffi-dev libffi7 libgmp-dev libgmp10 libncurses-dev libncurses5 libtinfo5 libicu-dev libncurses-dev z3
 
