@@ -81,7 +81,7 @@ RUN cabal install --haddock-hoogle \
     liquidhaskell-0.8.10.2
 
 # Generate hoogle db
-RUN hoogle generate && stack hoogle
+# RUN hoogle generate && stack hoogle
 
 ENV DEBIAN_FRONTEND=dialog
 
