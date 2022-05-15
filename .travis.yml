@@ -1,0 +1,13 @@
+language: shell
+services:
+  - docker
+jobs:
+  include:
+    - stage: build & push core Docker image
+      script:
+        - 'docker -D build  --tag antojf/$(basename -- $TRAVIS_BUILD_DIR):latest .'
+        - bash docker_push $(basename -- $TRAVIS_BUILD_DIR)
+    - stage: build & push dev Docker image
+      script:
+        - 'docker -D build  -f Dockerfile-dev --tag antojf/$(basename -- $TRAVIS_BUILD_DIR)-dev:latest .'
+        - bash docker_push $(basename -- $TRAVIS_BUILD_DIR)-dev
