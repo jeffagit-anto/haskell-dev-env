@@ -1,0 +1,20 @@
+FROM haskell-dev-env:latest
+
+ARG USERNAME=vscode
+
+ENV USERNAME=${USERNAME} \
+    USER_UID=2001 \
+    USER_GID=2001 \
+    DEBIAN_FRONTEND=noninteractive \
+
+USER ${USER_UID}:${USER_GID}
+WORKDIR /home/${USERNAME}
+
+RUN ulimit -n 8192
+
+# Generate hoogle db
+RUN hoogle generate && stack hoogle
+
+ENV DEBIAN_FRONTEND=dialog
+
+ENTRYPOINT ["/bin/bash"]

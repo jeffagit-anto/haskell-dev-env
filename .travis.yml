@@ -3,7 +3,11 @@ services:
   - docker
 jobs:
   include:
-    - stage: build & push core Docker image
+    - stage: build & push Docker image without Hoogle
       script:
         - 'docker -D build -f .devcontainer/Dockerfile --tag antojf/$(basename -- $TRAVIS_BUILD_DIR):latest .'
         - bash docker_push $(basename -- $TRAVIS_BUILD_DIR)
+    - stage: build & push Docker image with Hoogle
+      script:
+        - 'docker -D build  -f Dockerfile-withHoogle --tag antojf/$(basename -- $TRAVIS_BUILD_DIR)-with-hoogle:latest .'
+        - bash docker_push $(basename -- $TRAVIS_BUILD_DIR)-with-hoogle

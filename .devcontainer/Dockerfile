@@ -31,6 +31,9 @@ RUN groupadd --gid $USER_GID $USERNAME && \
 
 USER ${USER_UID}:${USER_GID}
 WORKDIR /home/${USERNAME}
+
+RUN ulimit -n 8192
+
 ENV PATH="/home/${USERNAME}/.local/bin:/home/${USERNAME}/.cabal/bin:/home/${USERNAME}/.ghcup/bin:$PATH"
 
 RUN echo "export PATH=$PATH" >> /home/$USERNAME/.profile
@@ -86,9 +89,6 @@ RUN cabal install --haddock-hoogle -v \
     hoogle-5.0.18.3 \
     ormolu-0.1.3.1 \
     liquidhaskell-0.8.10.2
-
-# Generate hoogle db
-RUN hoogle generate && stack hoogle
 
 ENV DEBIAN_FRONTEND=dialog
 
